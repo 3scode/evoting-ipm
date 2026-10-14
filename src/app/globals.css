@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --color-primary-soft: #d1fae5;
+  --color-accent: #f59e0b;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background-size: 800px 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+.kiosk-input {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+.touch-kiosk { min-height: 48px; min-width: 48px; }
+
+@page { size: A4 portrait; margin: 10mm; }
+@media print {
+  body * { visibility: hidden; }
+  #print-area, #print-area * { visibility: visible; }
+  #print-area {
+    position: absolute;
+    inset: 0;
+    display: block !important;
+    background: #fff;
+  }
+  .print-card {
+    width: 80mm;
+    margin: 0 auto;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print-sheet { display: block !important; }
+  .print-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+  }
+  .print-cut {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
